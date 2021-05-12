@@ -26,11 +26,20 @@ hr.section-break
     a.types-filter-button
       = params["language"] || "Select Language"
 
-    ul.types-filter
+
+    div.types-filter
       = cache(:language_list, expires_in: 1.hour) do
-        - Repo.select("DISTINCT language").map(&:language).compact.sort.each do |lang|
-          - unless lang.nil?
-            li = link_to lang, "#", data: { toggle: "tab", language: lang, query: "language" }
+        div.language-filter
+          - if current_user.try(:favorite_languages)
+            ul.languages-list
+              - current_user.try(:favorite_languages).sort.each do |lang|
+                - unless lang.nil?
+                  li = link_to lang, "#", data: { toggle: "tab", language: lang, query: "language" }
+            hr.filter-break
+          ul.language-list
+            - Repo.select("DISTINCT language").map(&:language).sort.each do |lang|
+                - unless lang.nil?
+                li  = link_to lang, "#", data: { toggle: "tab", language: lang, query: "language" }
 
   section.repo-list-with-pagination
     = render "repos_with_pagination", repos: @repos
