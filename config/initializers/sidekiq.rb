@@ -2,11 +2,17 @@
 
 unless Rails.env.production?
   Sidekiq.configure_server do |config|
-    config.redis = { url: ENV["REDIS_URL"], namespace: "codetriage-sidekiq" }
+    config.redis = {
+      host: 'redis',
+      port: '6379'
+    }
   end
 
   Sidekiq.configure_client do |config|
-    config.redis = { url: ENV["REDIS_URL"], namespace: "codetriage-sidekiq" }
+    config.redis = {
+      host: 'redis',
+      port: '6379'
+    }
   end
 end
 
