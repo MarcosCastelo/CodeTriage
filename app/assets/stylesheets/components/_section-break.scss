@@ -1,5 +1,9 @@
 .section-break {
-  border-bottom: 5px solid lighten($base-background-color, 5%);
-  margin: 6rem auto;
-  max-width: 25rem;
+    border-bottom: 5px solid lighten($base-background-color, 5%);
+    margin: 6rem auto;
+    max-width: 25rem;
+}
+
+.filter-break {
+    border-bottom: 1px solid lighten($action-color, 5%);
 }
