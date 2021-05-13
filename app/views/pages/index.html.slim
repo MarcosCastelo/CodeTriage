@@ -37,7 +37,7 @@ hr.section-break
                   li = link_to lang, "#", data: { toggle: "tab", language: lang, query: "language" }
             hr.filter-break
           ul.language-list
-            - Repo.select("DISTINCT language").map(&:language).sort.each do |lang|
+            - Repo.select("DISTINCT language").map(&:language).reject(&:blank?).sort.each do |lang|
                 - unless lang.nil?
                 li  = link_to lang, "#", data: { toggle: "tab", language: lang, query: "language" }
 
